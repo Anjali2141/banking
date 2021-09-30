@@ -1,0 +1,28 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title USERS
+  body 
+    include layout.pug 
+    h1 All Users
+    .table 
+      table#usertable
+        thead
+          tr
+            th Name
+            th Balance
+            th Details
+            th Transfer To
+        each user in records
+          tr#user_list
+            td #{user.name}
+            td #{user.balance}
+            td
+              button.btn
+                a(target = '_blank' href=`/allusers/${user.id}`) Details   
+            td 
+              button.btn 
+                a(target = '_blank' href="/transfer") Transfer To

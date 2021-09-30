@@ -1,0 +1,77 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    title #{title}
+    //- script(src="/views/sendmoney.js" )
+    //- include sendmoney.js
+  body 
+    include layout 
+
+    h1 Transfer
+
+    form#form(action = '/transfer' method = "POST")
+      .container 
+        select#sendern(name="sendername")
+          option(disabled selected hidden) Select Sender
+          option(value="Lisa") Lisa 
+          option(value="Mack") Mack 
+          option(value="Rossie") Rossie 
+          option(value="Xiao") Xiao 
+          option(value="Bei") Bei 
+          option(value="Benny") Benny 
+          option(value="Reema") Reema 
+          option(value="Kevin") Kevin 
+          option(value="Christle") Christle 
+          option(value="Denie") Denie 
+
+        select#senderbal.hide(name="senderbalance", disabled)
+          option(value=`${transfers.balance}` selected hidden) #{transfers.balance} 
+
+        label.lab(for="credituser") Transfer To:
+
+      .container 
+        select#credituser(name="receivername")
+          option(disabled selected hidden) Select Receiver 
+          option(value="Lisa") Lisa 
+          option(value="Mack") Mack 
+          option(value="Rossie") Rossie 
+          option(value="Xiao") Xiao 
+          option(value="Bei") Bei 
+          option(value="Benny") Benny 
+          option(value="Reema") Reema 
+          option(value="Kevin") Kevin 
+          option(value="Christle") Christle 
+          option(value="Denie") Denie 
+  
+      label.lab(for="amount") Enter Amount: 
+  
+      input#amount(type="number" name="amount" placeholder="Amount")
+
+      button.btn#sendbtn(type="submit" onclick= "sendmoney()") Send
+      button.btn 
+        a(href='/allusers') Back 
+
+    script.
+      //- document.addEventListener("DOMContentLoaded",
+      var sendmoney = function() {
+        var money = parseInt(document.getElementById("amount").value);
+        console.log(money);
+        var bal = parseInt(document.getElementById("senderbalance").innerHTML);
+        console.log(bal);
+
+
+        if(money<=0){
+          alert("Please enter a real amount");
+     }
+        else if(money > bal) {
+          alert("Insufficient Balance");
+     }
+        else{
+          alert("Transfer Succesfully Done");
+      }
+
+     }
+      //- );
