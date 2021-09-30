@@ -1,8 +1,8 @@
 var sendmoney = function() {
      var money = parseInt(document.getElementById("amount").value);
-
-     var bal = parseInt(document.getElementById("senderbal").innerHTML);
-
+        console.log(money)
+     var bal = parseInt(document.getElementById("senderbalance").innerHTML);
+        console.log(bal)
      if(money<=0){
          alert("Please enter a real amount");
      }

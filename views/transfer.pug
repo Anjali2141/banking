@@ -12,29 +12,37 @@ html(lang="en")
 
     h1 Transfer
 
-    form#form(action = '/transfer' method = "POST")
+    form#form(action =`/transfer/${transfers.id}` method = "POST")
       .container 
+        label.lab(for="sendername") SENDER :: 
         select#sendern(name="sendername")
-          option(disabled selected hidden) Select Sender
-          option(value="Lisa") Lisa 
-          option(value="Mack") Mack 
-          option(value="Rossie") Rossie 
-          option(value="Xiao") Xiao 
-          option(value="Bei") Bei 
-          option(value="Benny") Benny 
-          option(value="Reema") Reema 
-          option(value="Kevin") Kevin 
-          option(value="Christle") Christle 
-          option(value="Denie") Denie 
+          option(selected,value=`${transfers.name}`) #{transfers.name}
+          //- option(value="Mack") Mack 
+          //- option(value="Rossie") Rossie 
+          //- option(value="Xiao") Xiao 
+          //- option(value="Bei") Bei 
+          //- option(value="Benny") Benny 
+          //- option(value="Reema") Reema 
+          //- option(value="Kevin") Kevin 
+          //- option(value="Christle") Christle 
+          //- option(value="Denie") Denie 
 
-        select#senderbal.hide(name="senderbalance", disabled)
-          option(value=`${transfers.balance}` selected hidden) #{transfers.balance} 
+      //- button.btn#findb(type="submit" onclick = "find()") Find
+      
+
+      //- form#form(action=`/transfer/${transfers.id}`, method="post") 
+          //- option(value="Lisa") Lisa
+      
+      label.lab(for="senderbalance") BALANCE :: 
+      select#senderbalance(name="senderbalance")
+        option(selected, value=`${transfers.balance}`) #{transfers.balance} 
 
         label.lab(for="credituser") Transfer To:
 
       .container 
+        label.lab(for="receivername") RECEIVER :: 
         select#credituser(name="receivername")
-          option(disabled selected hidden) Select Receiver 
+          option(selected) Select Receiver 
           option(value="Lisa") Lisa 
           option(value="Mack") Mack 
           option(value="Rossie") Rossie 
@@ -56,22 +64,36 @@ html(lang="en")
 
     script.
       //- document.addEventListener("DOMContentLoaded",
-      var sendmoney = function() {
+      //- function find() {
+      //-   var btn = document.getElementById("findb");
+      //-   var form = document.getElementById("form");
+
+      //-   if(form.style.display == "none"){
+      //-   form.style.display = "flex";
+      //-   } else{
+      //-     form.style.display = "none";
+      //-   }
+        
+      //- }
+
+
+      function sendmoney() {
+        //- console.log(transfer.balance);
         var money = parseInt(document.getElementById("amount").value);
         console.log(money);
-        var bal = parseInt(document.getElementById("senderbalance").innerHTML);
+        var bal = parseInt(document.getElementById("senderbalance").value);
         console.log(bal);
 
 
-        if(money<=0){
-          alert("Please enter a real amount");
-     }
-        else if(money > bal) {
+        if(money > bal) {
           alert("Insufficient Balance");
+     }
+        else if(money<=0){
+          alert("Please enter a real amount");
      }
         else{
           alert("Transfer Succesfully Done");
       }
-
+        
      }
       //- );

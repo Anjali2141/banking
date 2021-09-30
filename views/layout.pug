@@ -5,20 +5,34 @@ html(lang="en")
     meta(http-equiv="X-UA-Compatible", content="IE=edge")
     meta(name="viewport", content="width=device-width, initial-scale=1.0")
     title #{title}
+    //- link(rel="stylesheet", href="../public/stylesheets/style.css")
+    link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css", rel="stylesheet", integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC", crossorigin="anonymous")
+    script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js", integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM", crossorigin="anonymous")
   body 
-    nav.navbar
-      ul
-        li.item
+    nav.navbar.nav-tabs
+      //- ul
+      //-   li.item
+      //-     #logo
+
+      //-   li.item
+      //-     a(href="/") Home
+
+      //-   li.item
+      //-     a(href="/allusers") All Users
+
+      //-   //- li.item
+      //-   //-   a(href="/transfer") Transfer
+      
+      //-   li.item
+      //-     a(href="/transaction") Transaction History
+
+      ul.nav.nav-pills
+        li.nav-item
           #logo
-
-        li.item
-          a(href="/") Home
-
-        li.item
-          a(href="/allusers") All Users
-
-        li.item
-          a(href="/transfer") Transfer
-
-        li.item
-          a(href="/transaction") Transaction History
+          //- a.nav-link.disabled(href="#", tabindex="-1", aria-disabled="true") Disabled
+        li.nav-item
+          a.nav-link.active(aria-current="page", href="/") Home
+        li.nav-item
+          a.nav-link(href="/allusers") All Users
+        li.nav-item
+          a.nav-link(href="/transaction") Transaction History

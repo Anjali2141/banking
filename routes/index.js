@@ -38,40 +38,53 @@ router.get('/allusers/:id', function(req, res) {
   });
 }); 
 
+// router.get('/transfer', (req, res)=>{
+//   bank.exec((err, data)=>{
+//     if(err) throw err;
+//     else{
+//       res.status(200).render('transfer', {title:'TRANSFER', transfers:data});
+//     }
+//   });
+// });
 
-router.get('/transfer', function(req, res, next) {
- bhrgmodel.find({}, (err, data) => {
+router.get('/transfer/:id',async(req, res) =>{
+ bhrgmodel.findById(req.params.id, (err, data) => {
    if(err) console.log(err);
    else{
-     res.status(200).render('transfer', {title: 'TRANSFER', transfers:data});
+    res.status(200).render('transfer', { title: 'TRANSFER_ID', transfers: data });
    }
- });
+ }
+ );
 });
 
-router.post('/transfer', async(req, res) => {
+router.post('/transfer/:id', async(req, res) => {
   
   var dataObj = {
     sendername: req.body.sendername,
-    senderbalance: req.body.senderbalance,
+    // senderbalance: req.body.senderbalance,
     receivername: req.body.receivername,
     amount: req.body.amount
     // receiverbalance: req.body.receiverbalance
   }
 
       console.log(dataObj.sendername);
-      console.log(dataObj.senderbalance);
+      // console.log(dataObj.senderbalance);
       console.log(dataObj.receivername);
-      // console.log(dataObj.recieverbal);
+      // console.log(dataObj.receiverbal);
       
-      var SenderBalance = parseInt(dataObj.senderbalance);
+      // var SenderBalance = parseInt(dataObj.senderbalance);
       var Amount = parseInt(dataObj.amount);
       // console.log(Amount);
       
       
-      // var sender = await bhrgmodel.findOne({name: sendername});
-      // var SenderBalance = parseInt(sender.balance);
+      var sender = await bhrgmodel.findOne({name: dataObj.sendername});
+      var SenderBalance = parseInt(sender.balance);
       console.log(SenderBalance);
-      
+
+      // if(Amount>SenderBalance){
+      //   alert("Insufficient Balance");
+
+      // }
       var receiver = await bhrgmodel.findOne({name: dataObj.receivername});
       var getr = receiver ;
       var ReceiverBalance = parseInt(getr.balance);
@@ -83,7 +96,7 @@ router.post('/transfer', async(req, res) => {
     if(err) {console.log(err);
     }
     else {
-      res.status(200).render('transfer', {title: 'TRANSFER', transfers: data});
+      res.status(200).render('allusers', {title: 'USERS', records:data});
     }
   })
   }  else if(Amount > SenderBalance){
@@ -91,7 +104,9 @@ router.post('/transfer', async(req, res) => {
       if(err) {console.log(err);
       }
       else {
-        res.status(200).render('transfer', {title: 'TRANSFER', transfers: data});
+        // alert("Insufficient Balance");
+
+        res.status(200).render('allusers', {title: 'USERS', records: data});
       }
     })
   }
@@ -108,21 +123,22 @@ router.post('/transfer', async(req, res) => {
       amount: parseInt(req.body.amount),
       date: new Date()
     }).save(async(err, data) => {
-      if(err) throw err;
+      if(err) throw err
      await console.log("Successfully Added..");
     });
 
   await bhrgmodel.findOneAndUpdate({name: dataObj.sendername}, {balance:MoneyDebit}, (err) => {
     if(err) throw err;
-    console.log(`Sender's Data Updated Successfuly!!!`);
-  });
+    console.log(`Sender's Data Updated Successfuly!!!`)
+  })
   await bhrgmodel.findOneAndUpdate({name: dataObj.receivername}, {balance:CreditMoney}, (err) => {
     if(err) throw err;
-    console.log(`Reciever's Data Updated Successfully!!!`);
-  });
-  history.exec((err, data) => {
+     console.log(`Receiver's Data Updated Successfully!!!`)
+  })
+  history.exec(function(err,data){
+    // if(err) console.log("here is error");
     if(err) throw err;
-    res.status(200).render('transaction', { title: 'TRANSACTION', transactions: data });
+    res.status(200).render('transaction', { title: 'TRANSACTION', transactions: data});
   });
 };
  });
@@ -207,7 +223,7 @@ router.post('/transfer', async(req, res) => {
 router.get('/transaction', async(req, res, next) => {
   // if(err) throw err ;
   console.log(history.exec());
-  await transmodel.find({}, (err, data) => {
+   await transmodel.find({}, (err, data) => {
     if(err) throw err;
     res.status(200).render('transaction', {title: 'TRANSACTION', transactions: data});
   });    

@@ -8,3 +8,7 @@ li {
 a {
   color: #00B7FF;
 }
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  color: #fff;
+  background-color: #009688;
+}
