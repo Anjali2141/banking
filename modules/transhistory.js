@@ -4,10 +4,19 @@ require('mongoose-type-url');
 const validate = require('mongoose-validator');
 
 // connecting to database 
-mongoose.connect('mongodb://localhost/bhrgbank', {useNewUrlParser: true, useUnifiedTopology: true});
+const db = 'mongodb+srv://Anjali:Anjali@2141@cluster0.jt82p.mongodb.net/bhrgbank?retryWrites=true&w=majority';
+
+// connecting to database userdata
+
+mongoose.connect(db, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+});
 //connected
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:')).once('open', function() {
+var dbase = mongoose.connection;
+dbase.on('error', console.error.bind(console, 'connection error:')).once('open', function() {
 console.log('Connected to history.....');});
 
 const transchema = new mongoose.Schema({
@@ -21,6 +30,6 @@ const transchema = new mongoose.Schema({
 
 var transmodel = mongoose.model('transactions', transchema);
 
-module.exports = db;
+// module.exports = db;
 module.exports = transmodel;
 

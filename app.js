@@ -3,11 +3,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var mongo = require('mongodb'); 
+var mongodb = require('mongodb'); 
+const mongoose = require('mongoose');
+// const methodOverride =require('method-override');
+
 // var fs = require('fs');
 // var pug = require('pug');
 const host = '127.0.0.1';
-const port = process.env.PORT || 500;
+const port = process.env.PORT || 80;
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
