@@ -4,7 +4,7 @@ require('mongoose-type-url');
 const validate = require('mongoose-validator');
 
 // connecting to database 
-const db = 'mongodb+srv://Anjali:Anjali@2141@cluster0.jt82p.mongodb.net/bhrgbank?retryWrites=true&w=majority';
+const db = 'mongodb+srv://Anjali:Anjali2141@cluster0.jt82p.mongodb.net/bhrgbank?retryWrites=true&w=majority';
 
 // connecting to database userdata
 
