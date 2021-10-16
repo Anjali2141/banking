@@ -9,9 +9,9 @@ const db = 'mongodb+srv://Anjali:Anjali2141@cluster0.jt82p.mongodb.net/bhrgbank?
 
 mongoose.connect(db, {
     useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false
+    useUnifiedTopology: true
+    // useCreateIndex: true,
+    // useFindAndModify: false
 });
 //connected
 
