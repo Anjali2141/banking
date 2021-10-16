@@ -14,7 +14,7 @@ html(lang="en")
     h1 Details
 
     .container.table 
-      table#details 
+      table#details#tablebox#usertable 
         tr#id 
           th ID 
           td #{customer.id}
@@ -39,8 +39,8 @@ html(lang="en")
           th CITY 
           td #{customer.city}
 
-    tr
-      button.btn 
+    tr#btnblock
+      button.btn#useroptions
         a(target = '_blank' href = `/transfer/${customer.id}`) Transfer 
-      button.btn 
+      button.btn#useroptions
         a(href ="/allusers") Back

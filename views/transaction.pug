@@ -14,7 +14,7 @@ html(lang="en")
 
     h1 Transaction History 
 
-    .box 
+    .box#outerbox
       each transaction in transactions
         p#history 
           |  Transaction Successful:: AMOUNT: #{transaction.amount}-SENDER: #{transaction.sendername}-receiver:#{transaction.receivername}-#{transaction.date}

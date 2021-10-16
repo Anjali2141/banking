@@ -12,9 +12,10 @@ html(lang="en")
   body 
     include layout.pug 
     h1= title
-    p Welcome to #{title}
-    .show 
-      .home 
-      | All Users
-      .home 
-      | Transaction History
+    section#section
+      p Welcome to #{title}
+      .show 
+        .home 
+        | All Users
+        .home 
+        | Transaction History
