@@ -120,16 +120,7 @@ router.post('/transfer/:id', async(req, res) => {
 
     var CreditMoney = parseInt(ReceiverBalance) + parseInt(Amount)
     console.log(CreditMoney);
-
-    await bhrgmodel.findOneAndUpdate({name: dataObj.sendername}, {balance:MoneyDebit}, (err) => {
-      if(err) throw err;
-      console.log(`Sender's Data Updated Successfuly!!!`);
-    });
-    await bhrgmodel.findOneAndUpdate({name: dataObj.receivername}, {balance:CreditMoney}, (err) => {
-      if(err) throw err;
-      console.log(`Receiver's Data Updated Successfully!!!`);
-    }).then();
-    // res.redirect('/transaction');
+    
     var transdetails = await new transmodel({
       sendername: req.body.sendername,
       receivername: req.body.receivername,
@@ -139,6 +130,16 @@ router.post('/transfer/:id', async(req, res) => {
       if(err) throw err;
       await console.log("Successfully Added..");
     });
+    
+    await bhrgmodel.findOneAndUpdate({name: dataObj.sendername}, {balance:MoneyDebit}, (err) => {
+      if(err) throw err;
+      console.log(`Sender's Data Updated Successfuly!!!`);
+    })
+    await bhrgmodel.findOneAndUpdate({name: dataObj.receivername}, {balance:CreditMoney}, (err) => {
+      if(err) throw err;
+      console.log(`Receiver's Data Updated Successfully!!!`);
+    })
+    // res.redirect('/transaction');
     history.exec((err, data) => {
       if(err) throw err;
       res.status(200).render('transaction', { title: 'TRANSACTION', transactions: data });
