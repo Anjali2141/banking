@@ -9,8 +9,8 @@ const mongoose = require('mongoose');
 
 // var fs = require('fs');
 // var pug = require('pug');
-const host = '127.0.0.1';
-const port = process.env.PORT || 500;
+// const host = '127.0.0.1';
+const port = process.env.MONGODB_URI || 3000;
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -51,7 +51,7 @@ app.use(function(err, req, res, next) {
 });
 
 app.listen(port, ()=>{
-  console.log(`Server listening at http://${host}:${port}`);
+  console.log(`Server listening at http://:${port}`);
 });
 
 module.exports = app;
